@@ -70,8 +70,12 @@ class SharedFrameFilter():
                 except:
                     continue
 
-                if cols[4] != libName:
-                    continue
+                if len(cols) == 5:
+                    if cols[4] != libName:
+                        continue
+                else:
+                    if cols[3] != libName:
+                        continue
 
                 libStart = int(cols[0], 16)
                 absoluteAddress = address - libStart + \
