@@ -70,12 +70,12 @@ class SharedFrameFilter():
                 except:
                     continue
 
-                if len(cols) == 5:
-                    if cols[4] != libName:
-                        continue
-                else:
-                    if cols[3] != libName:
-                        continue
+                # Sooo ugly but the output is fixed lenght.
+                # This way we can support paths with spaces as well.
+                name = line[36:]
+
+                if name != libName:
+                    continue
 
                 libStart = int(cols[0], 16)
                 absoluteAddress = address - libStart + \
