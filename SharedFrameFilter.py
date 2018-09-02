@@ -87,6 +87,3 @@ class SharedFrameFilter():
             frame.filename = lambda: "0x%08x in %s" % (
                 absoluteAddress, frame.filename_orig())
             yield frame
-
-
-SharedFrameFilter()
