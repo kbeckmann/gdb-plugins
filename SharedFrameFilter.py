@@ -1,6 +1,7 @@
 import gdb
 from gdb.FrameDecorator import FrameDecorator
 import subprocess
+import os
 
 '''
 Usage in gdb:
@@ -83,7 +84,10 @@ class SharedFrameFilter():
 
                 break
 
-            frame.filename_orig = frame.filename
+            filename_orig = frame.filename()
+            if libName != filename_orig:
+                filename_orig = "%s @ %s" % (
+                    os.path.basename(libName), filename_orig)
             frame.filename = lambda: "0x%08x in %s" % (
-                absoluteAddress, frame.filename_orig())
+                absoluteAddress, filename_orig)
             yield frame
